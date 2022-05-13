@@ -35,8 +35,6 @@ function ThemeManager() {
 }
 
 ThemeManager.prototype = {
-    _days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-    _months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
     init: function () {
         if (window.debugMode) {
             //init Mock Data
@@ -146,28 +144,28 @@ ThemeManager.prototype = {
         // Control Buttons
         var manager = this;
         // ShutDown Button
-        if(!window.lightdm.can_shutdown) $('#control-shutdown').hide();
+        if (!window.lightdm.can_shutdown) $('#control-shutdown').hide();
         $('#control-shutdown').click(function () {
             manager.createAlert("Shutdown", "Do you Want to shutdown System?", function () {
                 lightdm.shutdown();
             });
         });
         // Hibernate Button
-        if(!window.lightdm.can_hibernate) $('#control-hibernate').hide();
+        if (!window.lightdm.can_hibernate) $('#control-hibernate').hide();
         $('#control-hibernate').click(function () {
             manager.createAlert("Hibernate", "Do you Want to Hibernate System?", function () {
                 lightdm.hibernate();
             });
         });
         // Suspend Button
-        if(!window.lightdm.can_suspend) $('#control-suspend').hide();
+        if (!window.lightdm.can_suspend) $('#control-suspend').hide();
         $('#control-suspend').click(function () {
             manager.createAlert("Suspend", "Do you Want to Suspend System?", function () {
                 lightdm.suspend();
             });
         });
         // Restart Button
-        if(!window.lightdm.can_restart) $('#control-restart').hide();
+        if (!window.lightdm.can_restart) $('#control-restart').hide();
         $('#control-restart').click(function () {
             manager.createAlert("Restart", "Do you Want to Restart System?", function () {
                 lightdm.restart();
@@ -229,8 +227,7 @@ ThemeManager.prototype = {
     updateTime: function () {
         //console.log("TICK TOK!");
         var _date = new Date();
-        $('#clock-date-day').html(this._days[_date.getDay()]);
-        $('#clock-date-date').html(_date.getDate() + ' ' + this._months[_date.getMonth()]);
+        $('#clock-date-date').html(_date.toLocaleDateString(navigator.language, { day: 'numeric', month: 'long', weekday: 'long', year: 'numeric' }));
         $('#clock-time-hr').html(_date.getHours());
         $('#clock-time-min').html((_date.getMinutes() < 10 ? '0' : '') + _date.getMinutes());
     },
@@ -318,105 +315,105 @@ function initMockData() {
             }
         },
         languages: [{
-                name: 'English',
-                code: 'en_US.utf8',
-                territory: 'USA'
-            },
-            {
-                name: 'Catalan',
-                code: 'ca_ES.utf8',
-                territory: 'Spain'
-            },
-            {
-                name: 'French',
-                code: 'fr_FR.utf8',
-                territory: 'France'
-            }
+            name: 'English',
+            code: 'en_US.utf8',
+            territory: 'USA'
+        },
+        {
+            name: 'Catalan',
+            code: 'ca_ES.utf8',
+            territory: 'Spain'
+        },
+        {
+            name: 'French',
+            code: 'fr_FR.utf8',
+            territory: 'France'
+        }
         ],
         layouts: [{
-                name: 'us',
-                short_description: 'en',
-                description: 'English (US)'
-            },
-            {
-                name: 'at',
-                short_description: 'de',
-                description: 'German (Austria)'
-            },
-            {
-                name: 'us rus',
-                short_description: 'ru',
-                description: 'Russian (US, phonetic)'
-            }
+            name: 'us',
+            short_description: 'en',
+            description: 'English (US)'
+        },
+        {
+            name: 'at',
+            short_description: 'de',
+            description: 'German (Austria)'
+        },
+        {
+            name: 'us rus',
+            short_description: 'ru',
+            description: 'Russian (US, phonetic)'
+        }
         ],
         sessions: [{
-                key: 'gnome',
-                name: 'GNOME',
-                comment: 'This session logs you into GNOME'
-            },
-            {
-                key: 'cinnamon',
-                name: 'Cinnamon',
-                comment: 'This session logs you into Cinnamon'
-            },
-            {
-                key: 'plasma',
-                name: 'Plasma',
-                comment: 'Plasma by KDE'
-            },
-            {
-                key: 'mate',
-                name: 'MATE',
-                comment: 'This session logs you into MATE'
-            },
-            {
-                key: 'openbox',
-                name: 'Openbox',
-                comment: 'This session logs you into Openbox'
-            }
+            key: 'gnome',
+            name: 'GNOME',
+            comment: 'This session logs you into GNOME'
+        },
+        {
+            key: 'cinnamon',
+            name: 'Cinnamon',
+            comment: 'This session logs you into Cinnamon'
+        },
+        {
+            key: 'plasma',
+            name: 'Plasma',
+            comment: 'Plasma by KDE'
+        },
+        {
+            key: 'mate',
+            name: 'MATE',
+            comment: 'This session logs you into MATE'
+        },
+        {
+            key: 'openbox',
+            name: 'Openbox',
+            comment: 'This session logs you into Openbox'
+        }
         ],
         users: [{
-                display_name: 'Clark Kent',
-                language: null,
-                layout: null,
-                //image: '/usr/share/lightdm-webkit/themes/antergos/img/antergos-logo-user',
-                image: 'images/mockUser1.png',
-                home_directory: '/home/superman',
-                username: 'superman',
-                logged_in: false,
-                session: 'gnome',
+            display_name: 'Clark Kent',
+            language: null,
+            layout: null,
+            //image: '/usr/share/lightdm-webkit/themes/antergos/img/antergos-logo-user',
+            image: 'images/mockUser1.png',
+            home_directory: '/home/superman',
+            username: 'superman',
+            logged_in: false,
+            session: 'gnome',
 
-                name: 'superman',
-                real_name: 'Clark Kent'
-            },
-            {
-                display_name: 'Bruce Wayne',
-                language: null,
-                layout: null,
-                //image: '/usr/share/lightdm-webkit/themes/antergos/img/antergos-logo-user',
-                image: 'images/mockUser2.png',
-                home_directory: '/home/batman',
-                username: 'batman',
-                logged_in: false,
-                session: 'cinnamon',
+            name: 'superman',
+            real_name: 'Clark Kent'
+        },
+        {
+            display_name: 'Bruce Wayne',
+            language: null,
+            layout: null,
+            //image: '/usr/share/lightdm-webkit/themes/antergos/img/antergos-logo-user',
+            image: 'images/mockUser2.png',
+            home_directory: '/home/batman',
+            username: 'batman',
+            logged_in: false,
+            session: 'cinnamon',
 
-                name: 'batman',
-                real_name: 'Bruce Wayne'
-            },
-            {
-                display_name: 'Peter Parker',
-                language: null,
-                layout: null,
-                //image: '/usr/share/lightdm-webkit/themes/antergos/img/antergos-logo-user',
-                image: 'images/mockUser3.png',
-                home_directory: '/home/spiderman',
-                username: 'spiderman',
-                logged_in: false,
-                session: 'MATE',
+            name: 'batman',
+            real_name: 'Bruce Wayne'
+        },
+        {
+            display_name: 'Peter Parker',
+            language: null,
+            layout: null,
+            //image: '/usr/share/lightdm-webkit/themes/antergos/img/antergos-logo-user',
+            image: 'images/mockUser3.png',
+            home_directory: '/home/spiderman',
+            username: 'spiderman',
+            logged_in: false,
+            session: 'MATE',
 
-                name: 'spiderman',
-                real_name: 'Peter Parker'
-            }
+            name: 'spiderman',
+            real_name: 'Peter Parker'
+        }
         ]
     };
 
